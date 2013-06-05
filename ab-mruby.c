@@ -2291,6 +2291,21 @@ int main(int argc, const char * const argv[])
         }
     }
 
+
+    if (opt->ind != argc - 1) {
+        fprintf(stderr, "%s: wrong number of arguments\n", argv[0]);
+        usage(argv[0]);
+    }
+
+    if (method == NO_METH) {
+        method = GET;
+    }
+
+    if (parse_url(apr_pstrdup(cntxt, opt->argv[opt->ind++]))) {
+        fprintf(stderr, "%s: invalid URL\n", argv[0]);
+        usage(argv[0]);
+    }
+
     // mruby-config loaded
     FILE *mfp = NULL;
     mrb_state* mrb;
@@ -2299,9 +2314,13 @@ int main(int argc, const char * const argv[])
             printf("%s not found. skiped config load phase.\n", mconfig);
     }
 
-
     if (mfp != NULL) {
         mrb = mrb_open();
+        mrb_config_new_config_str(mrb, "TargetURL", fullurl);
+        mrb_config_add_config_str(mrb, "TargetHost", host_field);
+        mrb_config_add_config_int(mrb, "TargetPort", port);
+        mrb_config_add_config_str(mrb, "TargetPath", path);
+        mrb_config_add_config_boolean(mrb, "TargetisSSL", is_ssl);
         mrb_load_file(mrb, mfp);
     }
 
@@ -2462,20 +2481,6 @@ int main(int argc, const char * const argv[])
             }
         }
         mrb_close(mrb);
-    }
-
-    if (opt->ind != argc - 1) {
-        fprintf(stderr, "%s: wrong number of arguments\n", argv[0]);
-        usage(argv[0]);
-    }
-
-    if (method == NO_METH) {
-        method = GET;
-    }
-
-    if (parse_url(apr_pstrdup(cntxt, opt->argv[opt->ind++]))) {
-        fprintf(stderr, "%s: invalid URL\n", argv[0]);
-        usage(argv[0]);
     }
 
     if ((concurrency < 0) || (concurrency > MAX_CONCURRENCY)) {

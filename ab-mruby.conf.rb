@@ -1,10 +1,16 @@
 # Usage: ./ab-mruby -m ab-mruby.conf.rb [http[s]://]hostname[:port]/path
 
-new_config(
+p get_config("TargetURL").to_s
+p get_config("TargetPort").to_s
+p get_config("TargetHost").to_s
+p get_config("TargetPath").to_s
+p get_config("TargetisSSL").to_s
+
+add_config(
     "TotalRequests"         => 100,                       # int
     "Concurrency"           => 10,                        # int max 20000
     "KeepAlive"             => true,                      # true or false or nil
-    "VerboseLevel"          => 5,                         # int 1 ~ 5
+    "VerboseLevel"          => 1,                         # int 1 ~ 5
     "ShowProgress"          => true,                      # true, false or nil
     "ShowPercentile"        => true,                      # true, false or nil
     "ShowConfidence"        => true,                      # true, false or nil
