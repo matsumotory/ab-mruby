@@ -14,7 +14,7 @@ make
 
 ## How to use
 
-- write config into ab-mruby.config.rb
+- write config pattern into ab-mruby.config.rb
 
 ```ruby
 #
