@@ -1,22 +1,5 @@
-# ab-mruby
-
-ab-mruby embedded into ab by matsumoto_r.
-
-configured by mruby script.
-
-## How to build
-
-```
-git submodule init
-git submodule update
-make
-```
-
-## How to use
-
-- write config into ab-mruby.config.rb
-```ruby
 # Usage: ./ab-mruby -m ab-mruby.conf.rb [http[s]://]hostname[:port]/path
+
 new_config(
     "TotalRequests"         => 100,                       # int
     "Concurrency"           => 10,                        # int max 20000
@@ -45,9 +28,4 @@ new_config(
     "SSLCipher"             => 'DHE-RSA-AES128-SHA',      # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
     "SSLProtocol"           => 'SSL3',                    # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
 )
-```
 
-- ab-mruby benchmark start!
-```
-ab-mruby -m ab-mruby.conf.rb http://127.0.0.1/
-```
