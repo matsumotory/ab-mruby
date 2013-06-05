@@ -15,6 +15,7 @@ make
 ## How to use
 
 - write config into ab-mruby.config.rb
+
 ```ruby
 #
 # Usage: ./ab-mruby -m ab-mruby.conf.rb [http[s]://]hostname[:port]/path
@@ -141,6 +142,7 @@ end
 ```
 
 - ab-mruby benchmark start!
+
 ```
 ab-mruby -m ab-mruby.conf.rb http://127.0.0.1/
 ```
