@@ -1,8 +1,8 @@
 # ab-mruby
 
-ab-mruby embedded into ab by matsumoto_r.
+ab-mruby embedded mruby into ab by matsumoto_r.
 
-configured by mruby script.
+You can configure ab command options by mruby script.
 
 ## How to build
 
