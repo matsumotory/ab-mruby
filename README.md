@@ -222,13 +222,13 @@ module Kernel
   end
 end
 
-# get config value from C
 test_suite do
   "TargetServerHost".should_be               "192.168.12.251"
   "TargetServerPort".should_be               80
   "TargetDocumentPath".should_be             "/"
   "TargetServerSoftware".should_be           "Apache/2.4.4"
   "FailedRequests".should_be                 0
+  "KeepAliveRequests".should_be              0
   "WriteErrors".should_be                    0
   "HTMLTransferred".should_be                600
   "TargetDocumentLength".should_be           6
@@ -239,11 +239,12 @@ test_suite do
   "RequestPerSecond".should_be_over          1000
   "TimePerRequest".should_be_under           0.5
   "TimePerConcurrentRequest".should_be_under 5
-  "ConnetcErrors".should_be                  nil
-  "ReceiveErrors".should_be                  nil
-  "LengthErrors".should_be                   nil
-  "ExceptionsErrors".should_be               nil
-  "Non2xxResponses".should_be                nil
+  "TotalBodySent".should_be                  0
+  "ConnetcErrors".should_be                  0
+  "ReceiveErrors".should_be                  0
+  "LengthErrors".should_be                   0
+  "ExceptionsErrors".should_be               0
+  "Non2xxResponses".should_be                0
 end
 
 test_run

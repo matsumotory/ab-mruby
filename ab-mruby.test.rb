@@ -63,7 +63,6 @@ module Kernel
   end
 end
 
-# get config value from C
 test_suite do
   "TargetServerHost".should_be               "192.168.12.251"
   "TargetServerPort".should_be               80
