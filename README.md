@@ -2,7 +2,7 @@
 
 ab-mruby embedded mruby into ab by matsumoto_r.
 
-You can configure ab command options by mruby script.
+You can test and configure ab command options dynamically by mruby script.
 
 ## How to build
 
@@ -14,11 +14,11 @@ make
 
 ## How to use
 
-- write config pattern into ab-mruby.config.rb
+### write config pattern for HTTP benchmark into ab-mruby.config.rb
 
 ```ruby
 #
-# Usage: ./ab-mruby -m ab-mruby.conf.rb [http[s]://]hostname[:port]/path
+# Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb[http[s]://]hostname[:port]/path
 #
 # add_config(
 #     "TotalRequests"         => 100,                       # int
@@ -152,9 +152,9 @@ if get_config("TargetisSSL")
 end
 ```
 
-- write test pattern into ab-mruby.test.rb
+### write test suite for HTTP benchmark into ab-mruby.test.rb
 
-```
+```ruby
 #
 # Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.text.rb [http[s]://]hostname[:port]/path
 #
