@@ -170,11 +170,42 @@ Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
 ======================================================================
 EOS
 
-# get config value from C
-p get_config
-result = get_config
+module Kernel
+  def test_suite &blk
+    @@r = get_config
+    @@t = blk
+  end
+  def should_be val
+    puts "[TEST CASE] #{self} (#{@@r[self]}) should be #{val}: #{@@r[self] == val}"
+  end
+  def should_be_over val
+    puts "[TEST CASE] #{self} (#{@@r[self]}) should be over #{val}: #{@@r[self] > val}"
+  end
+  def test_run
+    @@t.call
+  end
+end
 
-# write test pattern
+# get config value from C
+test_suite do
+  "TargetServerHost".should_be               "192.168.12.251"
+  "TargetServerPort".should_be               80
+  "TargetDocumentPath".should_be             "/"
+  "TargetServerSoftware".should_be           "Apache/2.4.4"
+  "FailedRequests".should_be                 0
+  "WriteErrors".should_be                    0
+  "HTMLTransferred".should_be                600
+  "TargetDocumentLength".should_be           6
+  "TotalTransferred".should_be               27500
+  "CompleteRequests".should_be               100
+  "TransferRate".should_be_over              460
+  "TimeTakenforTests".should_be_over         0.01
+  "RequestPerSecond".should_be_over          1000
+  "TimePerRequest".should_be_over            0.5
+  "TimePerConcurrentRequest".should_be_over  5
+end
+
+test_run
 ```
 
 - ab-mruby benchmark and test start!
@@ -214,10 +245,10 @@ Failed requests:        0
 Write errors:           0
 Total transferred:      27500 bytes
 HTML transferred:       600 bytes
-Requests per second:    1721.14 [#/sec] (mean)
-Time per request:       5.810 [ms] (mean)
-Time per request:       0.581 [ms] (mean, across all concurrent requests)
-Transfer rate:          462.22 [Kbytes/sec] received
+Requests per second:    1738.10 [#/sec] (mean)
+Time per request:       5.753 [ms] (mean)
+Time per request:       0.575 [ms] (mean, across all concurrent requests)
+Transfer rate:          466.78 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
@@ -243,7 +274,21 @@ Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
                             TEST PHASE
 
 ======================================================================
-{"TransferRate"=>462.2204221, "TargetServerPort"=>80, "FailedRequests"=>0, "TimeTakenforTests"=>0.058101, "RequestPerSecond"=>1721.140772, "WriteErrors"=>0, "HTMLTransferred"=>600, "TargetDocumentLength"=>6, "TargetDocumentPath"=>"/", "TotalTransferred"=>27500, "TimePerConcurrentRequest"=>5.8101, "TimePerRequest"=>0.58101, "TargetServerHost"=>"192.168.12.251", "TargetServerSoftware"=>"Apache/2.4.4", "CompleteRequests"=>100}
+[TEST CASE] TargetServerHost (192.168.12.251) should be 192.168.12.251: true
+[TEST CASE] TargetServerPort (80) should be 80: true
+[TEST CASE] TargetDocumentPath (/) should be /: true
+[TEST CASE] TargetServerSoftware (Apache/2.4.4) should be Apache/2.4.4: true
+[TEST CASE] FailedRequests (0) should be 0: true
+[TEST CASE] WriteErrors (0) should be 0: true
+[TEST CASE] HTMLTransferred (600) should be 600: true
+[TEST CASE] TargetDocumentLength (6) should be 6: true
+[TEST CASE] TotalTransferred (27500) should be 27500: true
+[TEST CASE] CompleteRequests (100) should be 100: true
+[TEST CASE] TransferRate (466.7756239) should be over 460: true
+[TEST CASE] TimeTakenforTests (0.057534) should be over 0.01: true
+[TEST CASE] RequestPerSecond (1738.102687) should be over 1000: true
+[TEST CASE] TimePerRequest (0.57534) should be over 0.5: true
+[TEST CASE] TimePerConcurrentRequest (5.7534) should be over 5: true
 ```
 
 # License
