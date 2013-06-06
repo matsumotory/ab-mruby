@@ -796,7 +796,12 @@ static void results_into_mruby()
 
     if (mtfp != NULL) {
         mrb = mrb_open();
-        mrb_config_new_config_str(mrb, "TargetServerSoftware", servername);
+        mrb_config_new_config_str(mrb, "TargetURL", fullurl);
+        mrb_config_add_config_str(mrb, "TargetHost", host_field);
+        mrb_config_add_config_int(mrb, "TargetPort", port);
+        mrb_config_add_config_str(mrb, "TargetPath", path);
+        mrb_config_add_config_boolean(mrb, "TargetisSSL", is_ssl);
+        mrb_config_add_config_str(mrb, "TargetServerSoftware", servername);
         mrb_config_add_config_str(mrb, "TargetServerHost", hostname);
         mrb_config_add_config_int(mrb, "TargetServerPort", port);
         if (is_ssl && ssl_info) {
