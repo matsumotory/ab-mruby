@@ -214,6 +214,9 @@ module Kernel
   def should_be_over val
     puts "[TEST CASE] #{self} (#{@@r[self]}) should be over #{val}: #{@@r[self] > val}"
   end
+  def should_be_under val
+    puts "[TEST CASE] #{self} (#{@@r[self]}) should be under #{val}: #{@@r[self] < val}"
+  end
   def test_run
     @@t.call
   end
@@ -232,10 +235,15 @@ test_suite do
   "TotalTransferred".should_be               27500
   "CompleteRequests".should_be               100
   "TransferRate".should_be_over              460
-  "TimeTakenforTests".should_be_over         0.01
+  "TimeTakenforTests".should_be_under        0.01
   "RequestPerSecond".should_be_over          1000
-  "TimePerRequest".should_be_over            0.5
-  "TimePerConcurrentRequest".should_be_over  5
+  "TimePerRequest".should_be_under           0.5
+  "TimePerConcurrentRequest".should_be_under 5
+  "ConnetcErrors".should_be                  nil
+  "ReceiveErrors".should_be                  nil
+  "LengthErrors".should_be                   nil
+  "ExceptionsErrors".should_be               nil
+  "Non2xxResponses".should_be                nil
 end
 
 test_run
