@@ -1,6 +1,8 @@
-# ab-mruby HTTP Benchmark and Test Tool Framework
+# ab-mruby HTTP Benchmark and Test Tool
 
-ab-mruby embedded mruby into ab by matsumoto_r.
+ab-mruby is a HTTP Benchmark and Test Framework.
+
+ab-mruby embedded mruby into ab command by matsumoto_r.
 
 You can test and configure ab command options dynamically by mruby script.
 
