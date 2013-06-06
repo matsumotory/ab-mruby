@@ -1,6 +1,37 @@
 #
 # Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.text.rb [http[s]://]hostname[:port]/path
 #
+# TEST PARAMETERS
+#
+# "TargetURL"
+# "TargetHost"
+# "TargetPort"
+# "TargetPath"
+# "TargetisSSL"
+# "TargetServerSoftware"
+# "TargetServerHost"
+# "TargetServerPort"
+# "TargetServerSSLInfo"         # if use SSL
+# "TargetDocumentPath"
+# "TargetDocumentLength"
+# "TimeTakenforTests"
+# "CompleteRequests"
+# "FailedRequests"
+# "ConnetcErrors"               # if FailedRequests > 0
+# "ReceiveErrors"               # if FailedRequests > 0
+# "LengthErrors"                # if FailedRequests > 0
+# "ExceptionsErrors"            # if FailedRequests > 0
+# "WriteErrors"
+# "Non2xxResponses"             # if Non2xxResponse > 0
+# "KeepAliveRequests"
+# "TotalTransferred"
+# "TotalBodySent"               # if body send
+# "HTMLTransferred"
+# "RequestPerSecond"
+# "TimePerConcurrentRequest"
+# "TimePerRequest"
+# "TransferRate"
+#
 
 # print ab-mruby headers
 print <<EOS
