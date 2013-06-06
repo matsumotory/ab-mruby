@@ -1,4 +1,4 @@
-# ab-mruby
+# ab-mruby HTTP Benchmark and Test Tool Framework
 
 ab-mruby embedded mruby into ab by matsumoto_r.
 
