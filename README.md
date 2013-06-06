@@ -146,3 +146,8 @@ end
 ```
 ab-mruby -m ab-mruby.conf.rb http://127.0.0.1/
 ```
+
+# License
+Licensed under the Apache License, Version 2.0
+
+http://www.apache.org/licenses/LICENSE-2.0
