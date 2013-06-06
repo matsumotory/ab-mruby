@@ -2335,9 +2335,10 @@ int main(int argc, const char * const argv[])
         mrb_get_config_value(mrb, "ShowPercentile",   "b", &percentile);
         mrb_get_config_value(mrb, "ShowConfidence",   "b", &confidence);
 
-        int addaprtimeout;
+        int addaprtimeout = -1;
         mrb_get_config_value(mrb, "TimeOut",  "i", &addaprtimeout);
-        aprtimeout = apr_time_from_sec(addaprtimeout);
+        if (addaprtimeout != -1)
+            aprtimeout = apr_time_from_sec(addaprtimeout);
 
         mrb_get_config_value(mrb, "TimeLimit",  "i", &tlimit);
         if (tlimit != 0)
