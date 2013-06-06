@@ -24,7 +24,7 @@ module Kernel
   def should_be_over val
     puts "[TEST CASE] #{self} (#{@@r[self]}) should be over #{val}: #{@@r[self] > val}"
   end
-  def run
+  def test_run
     @@t.call
   end
 end
@@ -48,4 +48,4 @@ test_suite do
   "TimePerConcurrentRequest".should_be_over  5
 end
 
-run
+test_run
