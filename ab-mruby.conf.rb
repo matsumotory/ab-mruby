@@ -35,6 +35,9 @@ print <<EOS
 ======================================================================
 This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
 Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
+
+                          CONFIG PHASE
+
 ======================================================================
 EOS
 

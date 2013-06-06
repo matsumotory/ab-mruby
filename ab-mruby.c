@@ -312,6 +312,7 @@ apr_port_t connectport;
 const char *gnuplot;          /* GNUplot file */
 const char *csvperc;          /* CSV Percentile file */
 const char *mconfig;          /* mruby config file */
+const char *mtest;            /* mruby test file */
 char url[1024];
 const char *fullurl;
 const char *colonhost;
@@ -777,6 +778,61 @@ static int compwait(struct data * a, struct data * b)
     if ((a->waittime) > (b->waittime))
         return 1;
     return 0;
+}
+
+static void results_into_mruby()
+{
+    double timetaken;
+
+    timetaken = (double) (lasttime - start) / APR_USEC_PER_SEC;
+
+    // mruby-config loaded
+    FILE *mtfp = NULL;
+    mrb_state* mrb;
+    if (mtest) {
+        if ((mtfp = fopen(mtest, "r")) == NULL)
+            printf("%s not found. skiped test load phase.\n", mtest);
+    }
+
+    if (mtfp != NULL) {
+        mrb = mrb_open();
+        mrb_config_new_config_str(mrb, "TargetServerSoftware", servername);
+        mrb_config_add_config_str(mrb, "TargetServerHost", hostname);
+        mrb_config_add_config_int(mrb, "TargetServerPort", port);
+        if (is_ssl && ssl_info) {
+            mrb_config_add_config_str(mrb, "TargetServerSSLInfo", ssl_info);
+        }
+        mrb_config_add_config_str(mrb, "TargetDocumentPath", path);
+        mrb_config_add_config_int(mrb, "TargetDocumentLength", (int)doclen);
+        mrb_config_add_config_flt(mrb, "TimeTakenforTests", (mrb_float) timetaken);
+        mrb_config_add_config_int(mrb, "CompleteRequests", done);
+        mrb_config_add_config_int(mrb, "FailedRequests", bad);
+        if (bad) {
+            mrb_config_add_config_int(mrb, "ConnetcErrors", err_conn);
+            mrb_config_add_config_int(mrb, "ReceiveErrors", err_recv);
+            mrb_config_add_config_int(mrb, "LengthErrors", err_length);
+            mrb_config_add_config_int(mrb, "ExceptionsErrors", err_except);
+        }
+        mrb_config_add_config_int(mrb, "WriteErrors", epipe);
+        if (err_response)
+            mrb_config_add_config_int(mrb, "Non2xxResponses", err_response);
+        if (keepalive)
+            mrb_config_add_config_int(mrb, "KeepAliveRequests", doneka);
+        mrb_config_add_config_int(mrb, "TotalTransferred", totalread);
+        if (send_body)
+            mrb_config_add_config_int(mrb, "TotalBodySent", totalposted);
+        mrb_config_add_config_int(mrb, "HTMLTransferred", totalbread);
+
+        if (timetaken && done) {
+            mrb_config_add_config_flt(mrb, "RequestPerSecond", (mrb_float) done / timetaken);
+            mrb_config_add_config_flt(mrb, "TimePerConcurrentRequest", (mrb_float) concurrency * timetaken * 1000 / done);
+            mrb_config_add_config_flt(mrb, "TimePerRequest", (mrb_float) timetaken * 1000 / done);
+            mrb_config_add_config_flt(mrb, "TransferRate", (mrb_float) totalread / 1024 / timetaken);
+        }
+
+        mrb_load_file(mrb, mtfp);
+        mrb_close(mrb);
+    }
 }
 
 static void output_results(int sig)
@@ -1854,6 +1910,9 @@ static void test(void)
         output_html_results();
     else
         output_results(0);
+    
+    if (mtest)
+        results_into_mruby();
 }
 
 /* ------------------------------------------------------- */
@@ -2104,7 +2163,7 @@ int main(int argc, const char * const argv[])
     myhost = NULL; /* 0.0.0.0 or :: */
 
     apr_getopt_init(&opt, cntxt, argc, argv);
-    while ((status = apr_getopt(opt, "m:n:c:t:s:b:T:p:u:v:rkVhwix:y:z:C:H:P:A:g:X:de:SqB:"
+    while ((status = apr_getopt(opt, "M:m:n:c:t:s:b:T:p:u:v:rkVhwix:y:z:C:H:P:A:g:X:de:SqB:"
 #ifdef USE_SSL
             "Z:f:"
 #endif
@@ -2144,6 +2203,9 @@ int main(int argc, const char * const argv[])
                 break;
             case 'm':
                 mconfig = strdup(opt_arg);
+                break;
+            case 'M':
+                mtest = strdup(opt_arg);
                 break;
             case 'S':
                 confidence = 0;
