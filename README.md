@@ -49,6 +49,17 @@ make
 #     "SSLProtocol"           => 'SSL3',                    # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
 # )
 
+# print ab-mruby headers
+print <<EOS
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
+
+                          CONFIG PHASE
+
+======================================================================
+EOS
+
 # get config value from C
 p get_config("TargetURL").to_s
 p get_config("TargetPort").to_s
@@ -141,10 +152,98 @@ if get_config("TargetisSSL")
 end
 ```
 
-- ab-mruby benchmark start!
+- write test pattern into ab-mruby.test.rb
 
 ```
-ab-mruby -m ab-mruby.conf.rb http://127.0.0.1/
+#
+# Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.text.rb [http[s]://]hostname[:port]/path
+#
+
+# print ab-mruby headers
+print <<EOS
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
+
+                            TEST PHASE
+
+======================================================================
+EOS
+
+# get config value from C
+p get_config
+result = get_config
+
+# write test pattern
+```
+
+- ab-mruby benchmark and test start!
+
+```bash
+$ ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://192.168.12.251/
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
+
+                          CONFIG PHASE
+
+======================================================================
+"http://192.168.12.251/"
+"80"
+"192.168.12.251"
+"/"
+"false"
+This is ApacheBench, Version 2.3-mruby <$Revision: 1430300 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.12.251 (be patient).....done
+
+
+Server Software:        Apache/2.4.4
+Server Hostname:        192.168.12.251
+Server Port:            80
+
+Document Path:          /
+Document Length:        6 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.058 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Total transferred:      27500 bytes
+HTML transferred:       600 bytes
+Requests per second:    1721.14 [#/sec] (mean)
+Time per request:       5.810 [ms] (mean)
+Time per request:       0.581 [ms] (mean, across all concurrent requests)
+Transfer rate:          462.22 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.0      0       1
+Waiting:        0    0   0.0      0       1
+Total:          0    1   0.1      1       1
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%      1 (longest request)
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
+
+                            TEST PHASE
+
+======================================================================
+{"TransferRate"=>462.2204221, "TargetServerPort"=>80, "FailedRequests"=>0, "TimeTakenforTests"=>0.058101, "RequestPerSecond"=>1721.140772, "WriteErrors"=>0, "HTMLTransferred"=>600, "TargetDocumentLength"=>6, "TargetDocumentPath"=>"/", "TotalTransferred"=>27500, "TimePerConcurrentRequest"=>5.8101, "TimePerRequest"=>0.58101, "TargetServerHost"=>"192.168.12.251", "TargetServerSoftware"=>"Apache/2.4.4", "CompleteRequests"=>100}
 ```
 
 # License
