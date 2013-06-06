@@ -812,6 +812,10 @@ static void results_into_mruby()
         mrb_config_add_config_flt(mrb, "TimeTakenforTests", (mrb_float) timetaken);
         mrb_config_add_config_int(mrb, "CompleteRequests", done);
         mrb_config_add_config_int(mrb, "FailedRequests", bad);
+        mrb_config_add_config_int(mrb, "ConnetcErrors", 0);
+        mrb_config_add_config_int(mrb, "ReceiveErrors", 0);
+        mrb_config_add_config_int(mrb, "LengthErrors", 0);
+        mrb_config_add_config_int(mrb, "ExceptionsErrors", 0);
         if (bad) {
             mrb_config_add_config_int(mrb, "ConnetcErrors", err_conn);
             mrb_config_add_config_int(mrb, "ReceiveErrors", err_recv);
@@ -819,11 +823,14 @@ static void results_into_mruby()
             mrb_config_add_config_int(mrb, "ExceptionsErrors", err_except);
         }
         mrb_config_add_config_int(mrb, "WriteErrors", epipe);
+        mrb_config_add_config_int(mrb, "Non2xxResponses", 0);
         if (err_response)
             mrb_config_add_config_int(mrb, "Non2xxResponses", err_response);
+        mrb_config_add_config_int(mrb, "KeepAliveRequests", 0);
         if (keepalive)
             mrb_config_add_config_int(mrb, "KeepAliveRequests", doneka);
         mrb_config_add_config_int(mrb, "TotalTransferred", totalread);
+        mrb_config_add_config_int(mrb, "TotalBodySent", 0);
         if (send_body)
             mrb_config_add_config_int(mrb, "TotalBodySent", totalposted);
         mrb_config_add_config_int(mrb, "HTMLTransferred", totalbread);

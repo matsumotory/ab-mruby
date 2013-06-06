@@ -280,22 +280,22 @@ Document Path:          /
 Document Length:        6 bytes
 
 Concurrency Level:      10
-Time taken for tests:   0.058 seconds
+Time taken for tests:   0.059 seconds
 Complete requests:      100
 Failed requests:        0
 Write errors:           0
 Total transferred:      27500 bytes
 HTML transferred:       600 bytes
-Requests per second:    1738.10 [#/sec] (mean)
-Time per request:       5.753 [ms] (mean)
-Time per request:       0.575 [ms] (mean, across all concurrent requests)
-Transfer rate:          466.78 [Kbytes/sec] received
+Requests per second:    1702.53 [#/sec] (mean)
+Time per request:       5.874 [ms] (mean)
+Time per request:       0.587 [ms] (mean, across all concurrent requests)
+Transfer rate:          457.22 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
+Connect:        0    0   0.1      0       0
 Processing:     0    0   0.0      0       1
-Waiting:        0    0   0.0      0       1
+Waiting:        0    0   0.0      0       0
 Total:          0    1   0.1      1       1
 
 Percentage of the requests served within a certain time (ms)
@@ -320,16 +320,23 @@ Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
 [TEST CASE] TargetDocumentPath (/) should be /: true
 [TEST CASE] TargetServerSoftware (Apache/2.4.4) should be Apache/2.4.4: true
 [TEST CASE] FailedRequests (0) should be 0: true
+[TEST CASE] KeepAliveRequests (0) should be 0: true
 [TEST CASE] WriteErrors (0) should be 0: true
 [TEST CASE] HTMLTransferred (600) should be 600: true
 [TEST CASE] TargetDocumentLength (6) should be 6: true
 [TEST CASE] TotalTransferred (27500) should be 27500: true
 [TEST CASE] CompleteRequests (100) should be 100: true
-[TEST CASE] TransferRate (466.7756239) should be over 460: true
-[TEST CASE] TimeTakenforTests (0.057534) should be over 0.01: true
-[TEST CASE] RequestPerSecond (1738.102687) should be over 1000: true
-[TEST CASE] TimePerRequest (0.57534) should be over 0.5: true
-[TEST CASE] TimePerConcurrentRequest (5.7534) should be over 5: true
+[TEST CASE] TransferRate (457.223317) should be over 460: false
+[TEST CASE] TimeTakenforTests (0.058736) should be under 0.01: false
+[TEST CASE] RequestPerSecond (1702.5333696) should be over 1000: true
+[TEST CASE] TimePerRequest (0.58736) should be under 0.5: false
+[TEST CASE] TimePerConcurrentRequest (5.8736) should be under 5: false
+[TEST CASE] TotalBodySent (0) should be 0: true
+[TEST CASE] ConnetcErrors (0) should be 0: true
+[TEST CASE] ReceiveErrors (0) should be 0: true
+[TEST CASE] LengthErrors (0) should be 0: true
+[TEST CASE] ExceptionsErrors (0) should be 0: true
+[TEST CASE] Non2xxResponses (0) should be 0: true
 ```
 
 # License
