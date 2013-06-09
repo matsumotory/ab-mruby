@@ -1678,12 +1678,13 @@ static void test(void)
     }
 
     if (!use_html) {
-        printf("Benchmarking %s ", hostname);
-    if (isproxy)
-        printf("[through %s:%d] ", proxyhost, proxyport);
-    printf("(be patient)%s",
-           (heartbeatres ? "\n" : "..."));
-    fflush(stdout);
+        if (!silent) {
+            printf("Benchmarking %s ", hostname);
+            if (isproxy)
+                printf("[through %s:%d] ", proxyhost, proxyport);
+            printf("(be patient)%s", (heartbeatres ? "\n" : "..."));
+            fflush(stdout);
+        }
     }
 
     con = calloc(concurrency, sizeof(struct connection));
@@ -1914,10 +1915,12 @@ static void test(void)
         }
     } while (lasttime < stoptime && done < requests);
 
-    if (heartbeatres)
+    if (heartbeatres) {
         fprintf(stderr, "Finished %d requests\n", done);
-    else
-        printf("..done\n");
+    } else {
+        if (!silent)
+            printf("..done\n");
+    }
 
     if (!silent) {
         if (use_html)
@@ -2628,7 +2631,8 @@ int main(int argc, const char * const argv[])
     apr_signal(SIGPIPE, SIG_IGN);       /* Ignore writes to connections that
                                          * have been closed at the other end. */
 #endif
-    copyright();
+    if (!silent)
+        copyright();
     test();
     apr_pool_destroy(cntxt);
 
