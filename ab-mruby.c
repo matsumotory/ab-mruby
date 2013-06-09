@@ -292,6 +292,7 @@ int confidence = 1;     /* Show confidence estimator and warnings */
 int tlimit = 0;         /* time limit in secs */
 int keepalive = 0;      /* try and do keepalive connections */
 int windowsize = 0;     /* we use the OS default window size */
+int silent = 0;
 char servername[1024];  /* name that server reports */
 char *hostname;         /* host name from URL */
 const char *host_field;       /* value of "Host:" header field */
@@ -1918,10 +1919,12 @@ static void test(void)
     else
         printf("..done\n");
 
-    if (use_html)
-        output_html_results();
-    else
-        output_results(0);
+    if (!silent) {
+        if (use_html)
+            output_html_results();
+        else
+            output_results(0);
+    }
     
     if (mtest)
         results_into_mruby();
@@ -2409,6 +2412,7 @@ int main(int argc, const char * const argv[])
 
     // get prams from mruby.conf
     if (mfp != NULL) {
+        mrb_get_config_value(mrb, "SilentMode",       "b", &silent);
         mrb_get_config_value(mrb, "VerboseLevel",     "i", &verbosity);
         mrb_get_config_value(mrb, "WaitSocketError",  "b", &recverrok);
         mrb_get_config_value(mrb, "KeepAlive",        "b", &keepalive);
