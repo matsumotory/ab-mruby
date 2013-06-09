@@ -25,6 +25,7 @@
 #     "Proxy"                 => nil,                       # 'proxy[:port]'
 #     "ProxyAuth"             => nil,                       # 'user:pass'
 #     "OutputHtml"            => false,                     # true, false or nil
+#     "SilentMode"            => false,                     # true, false or nil
 #     "BindAddress"           => nil,                       # 'matsumoto-r.jp'
 #     "SSLCipher"             => 'DHE-RSA-AES128-SHA',      # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
 #     "SSLProtocol"           => 'SSL3',                    # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
