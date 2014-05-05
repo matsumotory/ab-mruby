@@ -1,0 +1,26 @@
+language: c
+compiler:
+  - gcc
+  - clang
+before_install:
+  - sudo apt-get -qq update
+install:
+  - sudo apt-get -qq install rake bison libapr1-dev apache2
+before_script:
+  - make
+script:
+  - cd test
+  - sh ab-mruby-test.sh
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#hosting-ja"
+    on_success: always
+    on_failure: always
+    use_notice: true
+    skip_join: true
+    template:
+        - "[%{message}] %{repository} (%{commit}) by %{author}: See %{build_url}"
+  webhooks:
+    - secure: "WRiSNreWtI2ZxctRm80jNeHBgvxbDr7v2oKvb4w8OVi053VbTL1qESxmQ4F0YammrayNMqFRzxWe8TRP2BvkA2Ol7089fTdwFgAkGeYW8K5/7vzjQdFs8aGS7xdtEtdQ0REwI9yv8rWVv09eveneAiZNLt/bvE3861aLoKj7S5s="
+
