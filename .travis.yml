@@ -5,7 +5,7 @@ compiler:
 before_install:
   - sudo apt-get -qq update
 install:
-  - sudo apt-get -qq install rake bison libapr1-dev apache2
+  - sudo apt-get -qq install rake bison libapr1-dev libaprutil1-dev apache2
 before_script:
   - make
 script:
