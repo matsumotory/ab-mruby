@@ -1,4 +1,4 @@
-# ab-mruby HTTP Benchmark and Test Tool
+# ab-mruby HTTP Benchmark and Test Tool [![Build Status](https://travis-ci.org/matsumoto-r/ab-mruby.svg?branch=master)](https://travis-ci.org/matsumoto-r/ab-mruby)
 
 ab-mruby is a HTTP Benchmark and Test Framework.
 
