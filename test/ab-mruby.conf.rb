@@ -20,7 +20,7 @@
 #     "OutputGnuplotFile"     => nil,                       # './gnu.txt'
 #     "OutputCSVFile"         => nil,                       # './csv.txt'
 #     "AddCookie"             => nil,                       # 'Apache=1234'
-#     "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test' 
+#     "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test'
 #     "BasicAuth"             => nil,                       # 'user:pass'
 #     "Proxy"                 => nil,                       # 'proxy[:port]'
 #     "ProxyAuth"             => nil,                       # 'user:pass'
@@ -49,7 +49,7 @@ EOS
 
 # defined ab config pattern
 if get_config("TargetHost").to_s == "blog.example.jp"
-  
+
   add_config(
     "TotalRequests"         => 100,                       # int
     "Concurrency"           => 10,                        # int max 20000
@@ -69,7 +69,7 @@ if get_config("TargetHost").to_s == "blog.example.jp"
     "OutputGnuplotFile"     => nil,                       # './gnu.txt'
     "OutputCSVFile"         => nil,                       # './csv.txt'
     "AddCookie"             => nil,                       # 'Apache=1234'
-    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test' 
+    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test'
     "BasicAuth"             => nil,                       # 'user:pass'
     "Proxy"                 => nil,                       # 'proxy[:port]'
     "ProxyAuth"             => nil,                       # 'user:pass'
@@ -101,7 +101,7 @@ elsif get_config("TargetHost").to_s == "moblog.example.jp"
     "OutputGnuplotFile"     => nil,                       # './gnu.txt'
     "OutputCSVFile"         => nil,                       # './csv.txt'
     "AddCookie"             => nil,                       # 'Apache=1234'
-    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test' 
+    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test'
     "BasicAuth"             => nil,                       # 'user:pass'
     "Proxy"                 => nil,                       # 'proxy[:port]'
     "ProxyAuth"             => nil,                       # 'user:pass'
@@ -133,7 +133,7 @@ elsif get_config("TargetHost").to_s == "example.org"
     "OutputGnuplotFile"     => nil,                       # './gnu.txt'
     "OutputCSVFile"         => nil,                       # './csv.txt'
     "AddCookie"             => nil,                       # 'Apache=1234'
-    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test' 
+    "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test'
     "BasicAuth"             => nil,                       # 'user:pass'
     "Proxy"                 => nil,                       # 'proxy[:port]'
     "ProxyAuth"             => nil,                       # 'user:pass'

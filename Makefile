@@ -7,11 +7,11 @@ MAKE="make"
 
 HTTPD_SRC_ROOT=./httpd
 MRUBY_ROOT=./mruby
-LIBS=-lapr-1 -lssl -lcrypto -laprutil-1 -lm $(MRUBY_ROOT)/build/host/lib/libmruby.a 
+LIBS=-lapr-1 -lssl -lcrypto -laprutil-1 -lm $(MRUBY_ROOT)/build/host/lib/libmruby.a
 CFLAGS=-I/usr/include/apr-1.0 -I/usr/include/apr-1 -I./include -I$(MRUBY_ROOT)/include
 
 #   the default target
-all: 
+all:
 		git submodule init && git submodule update && cd mruby && cp -p ../build_config.rb . && rake && cd ..
 		gcc ab-mruby.c -o ab-mruby $(CFLAGS) $(LIBS)
 

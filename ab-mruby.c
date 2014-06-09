@@ -1789,7 +1789,7 @@ static void test(void)
         exit(1);
     }
 #endif              /* NOT_ASCII */
-    
+
     if (myhost) {
         /* This only needs to be done once */
         if ((rv = apr_sockaddr_info_get(&mysa, myhost, APR_UNSPEC, 0, 0, cntxt)) != APR_SUCCESS) {
@@ -1801,7 +1801,7 @@ static void test(void)
     }
 
     /* This too */
-    if ((rv = apr_sockaddr_info_get(&destsa, connecthost, 
+    if ((rv = apr_sockaddr_info_get(&destsa, connecthost,
                                     myhost ? mysa->family : APR_UNSPEC,
                                     connectport, 0, cntxt))
        != APR_SUCCESS) {
@@ -1928,7 +1928,7 @@ static void test(void)
         else
             output_results(0);
     }
-    
+
     if (mtest)
         results_into_mruby();
 }
@@ -2016,7 +2016,7 @@ static void usage(const char *progname)
 #endif
 
     fprintf(stderr, "    -Z ciphersuite  Specify SSL/TLS cipher suite (See openssl ciphers)\n");
-    fprintf(stderr, "    -f protocol     Specify SSL/TLS protocol\n"); 
+    fprintf(stderr, "    -f protocol     Specify SSL/TLS protocol\n");
     fprintf(stderr, "                    (" SSL2_HELP_MSG "SSL3, TLS1" TLS1_X_HELP_MSG " or ALL)\n");
 #endif
     exit(EINVAL);
@@ -2435,7 +2435,7 @@ int main(int argc, const char * const argv[])
             requests = MAX_REQUESTS;
 
         mrb_get_config_value(mrb, "WindowSize",  "i", &windowsize);
-        
+
         char *addpostfile = NULL;
         mrb_get_config_value(mrb, "PostFile",  "z", &addpostfile);
         if (addpostfile != NULL) {
