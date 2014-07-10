@@ -168,36 +168,36 @@ end
 #
 # Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.text.rb [http[s]://]hostname[:port]/path
 #
-# TEST PARAMETERS
+# BENCHMARK RESULT AND TEST PARAMETERS
 #
-# "TargetURL"
-# "TargetHost"
-# "TargetPort"
-# "TargetPath"
-# "TargetisSSL"
-# "TargetServerSoftware"
-# "TargetServerHost"
-# "TargetServerPort"
-# "TargetServerSSLInfo"         # if use SSL
-# "TargetDocumentPath"
-# "TargetDocumentLength"
-# "TimeTakenforTests"
-# "CompleteRequests"
-# "FailedRequests"
-# "ConnetcErrors"               # if FailedRequests > 0
-# "ReceiveErrors"               # if FailedRequests > 0
-# "LengthErrors"                # if FailedRequests > 0
-# "ExceptionsErrors"            # if FailedRequests > 0
-# "WriteErrors"
-# "Non2xxResponses"             # if Non2xxResponse > 0
-# "KeepAliveRequests"
-# "TotalTransferred"
-# "TotalBodySent"               # if body send
-# "HTMLTransferred"
-# "RequestPerSecond"
-# "TimePerConcurrentRequest"
-# "TimePerRequest"
-# "TransferRate"
+# get_config "TargetURL"
+# get_config "TargetHost"
+# get_config "TargetPort"
+# get_config "TargetPath"
+# get_config "TargetisSSL"
+# get_config "TargetServerSoftware"
+# get_config "TargetServerHost"
+# get_config "TargetServerPort"
+# get_config "TargetServerSSLInfo"         # if use SSL
+# get_config "TargetDocumentPath"
+# get_config "TargetDocumentLength"
+# get_config "TimeTakenforTests"
+# get_config "CompleteRequests"
+# get_config "FailedRequests"
+# get_config "ConnetcErrors"               # if FailedRequests > 0
+# get_config "ReceiveErrors"               # if FailedRequests > 0
+# get_config "LengthErrors"                # if FailedRequests > 0
+# get_config "ExceptionsErrors"            # if FailedRequests > 0
+# get_config "WriteErrors"
+# get_config "Non2xxResponses"             # if Non2xxResponse > 0
+# get_config "KeepAliveRequests"
+# get_config "TotalTransferred"
+# get_config "TotalBodySent"               # if body send
+# get_config "HTMLTransferred"
+# get_config "RequestPerSecond"
+# get_config "TimePerConcurrentRequest"
+# get_config "TimePerRequest"
+# get_config "TransferRate"
 #
 
 module Kernel
