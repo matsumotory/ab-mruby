@@ -22,7 +22,7 @@
 #   docker run -d your_name:ab-mruby http://example.com/
 #
 
-FROM stackbrew/ubuntu:14.04
+FROM ubuntu:14.04
 MAINTAINER matsumotory
 
 RUN apt-get -y update
