@@ -847,7 +847,7 @@ static void results_into_mruby()
         if (mrb->exc) {
           mrb_print_error(mrb);
           mrb_close(mrb);
-          exit(2);
+          exit(1);
         }
 
         mrb_close(mrb);
