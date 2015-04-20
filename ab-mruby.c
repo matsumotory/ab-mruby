@@ -844,6 +844,12 @@ static void results_into_mruby()
         }
 
         mrb_load_file(mrb, mtfp);
+        if (mrb->exc) {
+          mrb_print_error(mrb);
+          mrb_close(mrb);
+          exit(2);
+        }
+
         mrb_close(mrb);
     }
 }
@@ -2411,6 +2417,12 @@ int main(int argc, const char * const argv[])
         mrb_config_add_config_str(mrb, "TargetPath", path);
         mrb_config_add_config_boolean(mrb, "TargetisSSL", is_ssl);
         mrb_load_file(mrb, mfp);
+        if (mrb->exc) {
+          mrb_print_error(mrb);
+          mrb_close(mrb);
+          exit(2);
+        }
+
     }
 
     // get prams from mruby.conf
