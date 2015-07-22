@@ -37,7 +37,7 @@ make
 #     "ShowPercentile"        => true,                      # true, false or nil
 #     "ShowConfidence"        => true,                      # true, false or nil
 #     "WaitSocketError"       => true,                      # true, false or nil
-#     "RequestTimeOut"        => 30,                        # int sec
+#     "RequestTimeOut"        => 30000,                     # int msec
 #     "BechmarkTimelimit"     => 50000,                     # int sec
 #     "WindowSize"            => nil,                       # int byte
 #     "HeadMethodOnly"        => false,                     # true, false or nil
@@ -88,7 +88,7 @@ if get_config("TargetHost").to_s == "blog.example.jp"
     "ShowPercentile"        => true,                      # true, false or nil
     "ShowConfidence"        => true,                      # true, false or nil
     "WaitSocketError"       => true,                      # true, false or nil
-    "RequestTimeOut"        => 30,                        # int sec
+    "RequestTimeOut"        => 30000,                     # int msec
     "BechmarkTimelimit"     => 50000,                     # int sec
     "WindowSize"            => nil,                       # int byte
     "HeadMethodOnly"        => false,                     # true, false or nil
@@ -120,7 +120,7 @@ elsif get_config("TargetHost").to_s == "moblog.example.jp"
     "ShowPercentile"        => true,                      # true, false or nil
     "ShowConfidence"        => true,                      # true, false or nil
     "WaitSocketError"       => true,                      # true, false or nil
-    "RequestTimeOut"        => 30,                        # int sec
+    "RequestTimeOut"        => 30000,                     # int msec
     "BechmarkTimelimit"     => 50000,                     # int sec
     "WindowSize"            => nil,                       # int byte
     "HeadMethodOnly"        => false,                     # true, false or nil
