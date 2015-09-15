@@ -18,7 +18,7 @@ make
 ### ab-mruby benchmark and test command
 
 ```bash
-./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://192.168.12.251/
+./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://127.0.0.1/
 ```
 
 
