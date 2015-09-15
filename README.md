@@ -24,19 +24,9 @@ make
 
 ### write config pattern for HTTP benchmark into ab-mruby.config.rb
 
+see also `test/ab-mruby.conf.rb`
+
 ```ruby
-#
-# Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb[http[s]://]hostname[:port]/path
-#
-
-# get config value from C
-p get_config("TargetURL")
-p get_config("TargetPort")
-p get_config("TargetHost")
-p get_config("TargetPath")
-p get_config("TargetisSSL")     #=> true or false
-
-# defined config pattern
 add_config(
   "TotalRequests"         => 10,                        # int
   "Concurrency"           => 1,                         # int max 20000
@@ -69,53 +59,9 @@ add_config(
 
 ### write test suite for HTTP benchmark into ab-mruby.test.rb
 
+see also `test/ab-mruby.test.rb`
+
 ```ruby
-#
-# Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.text.rb [http[s]://]hostname[:port]/path
-#
-# BENCHMARK RESULT AND TEST PARAMETERS
-#
-# "TargetURL"
-# "TargetHost"
-# "TargetPort"
-# "TargetPath"
-# "TargetisSSL"
-# "TargetServerSoftware"
-# "TargetServerHost"
-# "TargetServerPort"
-# "TargetServerSSLInfo"         # if use SSL
-# "TargetDocumentPath"
-# "TargetDocumentLength"
-# "TimeTakenforTests"
-# "CompleteRequests"
-# "FailedRequests"
-# "ConnetcErrors"               # if FailedRequests > 0
-# "ReceiveErrors"               # if FailedRequests > 0
-# "LengthErrors"                # if FailedRequests > 0
-# "ExceptionsErrors"            # if FailedRequests > 0
-# "WriteErrors"
-# "Non2xxResponses"             # if Non2xxResponse > 0
-# "KeepAliveRequests"
-# "TotalTransferred"
-# "TotalBodySent"               # if body send
-# "HTMLTransferred"
-# "RequestPerSecond"
-# "TimePerConcurrentRequest"
-# "TimePerRequest"
-# "TransferRate"
-#
-
-# print ab-mruby headers
-print <<EOS
-======================================================================
-This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
-Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
-
-                            TEST PHASE
-
-======================================================================
-EOS
-
 test_suite do
   "TargetServerHost".should_be                 "192.168.12.251"
   "TargetServerPort".should_be                 80
@@ -148,11 +94,6 @@ test_run
 
 ```bash
 $ ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://192.168.12.251/
-"http://192.168.12.251/"
-"80"
-"192.168.12.251"
-"/"
-"false"
 
 This is ApacheBench, Version 2.3-mruby <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
@@ -198,13 +139,7 @@ Percentage of the requests served within a certain time (ms)
   98%      3
   99%      4
  100%      4 (longest request)
-======================================================================
-This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
-Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
 
-                            TEST PHASE
-
-======================================================================
 [TEST CASE] [true] TargetServerHost (192.168.12.251) should be 192.168.12.251
 [TEST CASE] [true] TargetServerPort (80) should be 80
 [TEST CASE] [true] TargetDocumentPath (/) should be /
