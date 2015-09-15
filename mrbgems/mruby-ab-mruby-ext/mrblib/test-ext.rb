@@ -1,3 +1,4 @@
+class TestError < StandardError; end
 module Kernel
   def test_suite &blk
     @@r = get_config
@@ -25,7 +26,7 @@ module Kernel
   def test_run
     @@t.call
     puts "\ntest suites: #{bln_color @@result}\n"
-    raise if @@result == false
+    raise TestError if @@result == false
   end
 end
 
