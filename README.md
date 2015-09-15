@@ -93,76 +93,41 @@ test_run
 ### ab-mruby benchmark and test start!
 
 ```bash
-$ ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://192.168.12.251/
+$ ./ab-mruby -m test/ab-mruby.conf.rb -M test/ab-mruby.test.rb http://127.0.0.1/
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
 
-This is ApacheBench, Version 2.3-mruby <$Revision: 1430300 $>
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
+                          CONFIG PHASE
 
-Benchmarking 192.168.12.251 (be patient).....done
+======================================================================
+  Target Information  URL: http://127.0.0.1/
+  Target Information HOST: 127.0.0.1
+  Target Information PORT: 80
+  Target Information PATH: /
+  Target Information  SSL: false
+======================================================================
+This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
+Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
 
+                            TEST PHASE
 
-Server Software:        Apache/2.4.4
-Server Hostname:        192.168.12.251
-Server Port:            80
-
-Document Path:          /
-Document Length:        6 bytes
-
-Concurrency Level:      10
-Time taken for tests:   0.010 seconds
-Complete requests:      100
-Failed requests:        0
-Write errors:           0
-Keep-Alive requests:    100
-Total transferred:      31110 bytes
-HTML transferred:       600 bytes
-Requests per second:    9583.13 [#/sec] (mean)
-Time per request:       1.043 [ms] (mean)
-Time per request:       0.104 [ms] (mean, across all concurrent requests)
-Transfer rate:          2911.44 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.1      0       0
-Processing:     0    1   0.7      1       4
-Waiting:        0    1   0.7      1       4
-Total:          0    1   0.7      1       4
-
-Percentage of the requests served within a certain time (ms)
-  50%      1
-  66%      1
-  75%      2
-  80%      2
-  90%      2
-  95%      2
-  98%      3
-  99%      4
- 100%      4 (longest request)
-
-[TEST CASE] [true] TargetServerHost (192.168.12.251) should be 192.168.12.251
-[TEST CASE] [true] TargetServerPort (80) should be 80
-[TEST CASE] [true] TargetDocumentPath (/) should be /
-[TEST CASE] [true] TargetServerSoftware (Apache/2.4.4) should be Apache/2.4.4
+======================================================================
 [TEST CASE] [true] FailedRequests (0) should be 0
-[TEST CASE] [false] KeepAliveRequests (100) should be 0
 [TEST CASE] [true] WriteErrors (0) should be 0
-[TEST CASE] [true] HTMLTransferred (600) should be 600
-[TEST CASE] [true] TargetDocumentLength (6) should be 6
-[TEST CASE] [false] TotalTransferred (31110) should be 27500
 [TEST CASE] [true] CompleteRequests (100) should be 100
-[TEST CASE] [true] TransferRate (2911.4383684) should be over 460
-[TEST CASE] [false] TimeTakenforTests (0.010435) should be under 0.01
-[TEST CASE] [true] RequestPerSecond (9583.1336847) should be over 1000
-[TEST CASE] [true] TimePerRequest (0.10435) should be under 0.5
-[TEST CASE] [true] TimePerConcurrentRequest (1.0435) should be under 5
-[TEST CASE] [true] TotalBodySent (0) should be 0
+[TEST CASE] [true] TransferRate (2521.9284988877) should be over 500
+[TEST CASE] [true] RequestPerSecond (3224.0384305381) should be over 1000
+[TEST CASE] [true] TimePerRequest (0.31017) should be under 100
+[TEST CASE] [true] TimePerConcurrentRequest (3.1017) should be under 3000
 [TEST CASE] [true] ConnetcErrors (0) should be 0
 [TEST CASE] [true] ReceiveErrors (0) should be 0
 [TEST CASE] [true] LengthErrors (0) should be 0
 [TEST CASE] [true] ExceptionsErrors (0) should be 0
-[TEST CASE] [true] Non2xxResponses (0) should be 0
+[TEST CASE] [false] Non2xxResponses (100) should be 0
 
+test suites: [false]
+TestError: TestError
 ```
 
 # License
