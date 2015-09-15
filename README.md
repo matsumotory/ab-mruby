@@ -28,32 +28,11 @@ see also `test/ab-mruby.conf.rb`
 
 ```ruby
 add_config(
-  "TotalRequests"         => 10,                        # int
-  "Concurrency"           => 1,                         # int max 20000
+  "TotalRequests"         => 100,                       # int
+  "Concurrency"           => 10,                        # int max 20000
   "KeepAlive"             => true,                      # true or false or nil
   "VerboseLevel"          => 1,                         # int 1 ~ 5
-  "ShowProgress"          => true,                      # true, false or nil
-  "ShowPercentile"        => true,                      # true, false or nil
-  "ShowConfidence"        => true,                      # true, false or nil
-  "WaitSocketError"       => true,                      # true, false or nil
-  "RequestTimeOut"        => 30000,                     # int msec
-  "BechmarkTimelimit"     => 50000,                     # int sec
-  "WindowSize"            => nil,                       # int byte
-  "HeadMethodOnly"        => false,                     # true, false or nil
-  "Postfile"              => nil,                       # './post.txt',
-  "Putfile"               => nil,                       # './put.txt',
-  "ContentType"           => nil,                       # 'application/x-www-form-urlencoded',
-  "OutputGnuplotFile"     => nil,                       # './gnu.txt'
-  "OutputCSVFile"         => nil,                       # './csv.txt'
-  "AddCookie"             => nil,                       # 'Apache=1234'
-  "AddHeader"             => 'User-Agent: ab-blog',     # 'User-Agent: test'
-  "BasicAuth"             => nil,                       # 'user:pass'
-  "Proxy"                 => nil,                       # 'proxy[:port]'
-  "ProxyAuth"             => nil,                       # 'user:pass'
-  "OutputHtml"            => false,                     # true, false or nil
-  "BindAddress"           => nil,                       # 'matsumoto-r.jp'
-  "SSLCipher"             => nil,                       # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
-  "SSLProtocol"           => nil,                       # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
+  "SilentMode"            => true,
 )
 ```
 
@@ -63,23 +42,13 @@ see also `test/ab-mruby.test.rb`
 
 ```ruby
 test_suite do
-  "TargetServerHost".should_be                 "192.168.12.251"
-  "TargetServerPort".should_be                 80
-  "TargetDocumentPath".should_be               "/"
-  "TargetServerSoftware".should_be             "Apache/2.4.4"
   "FailedRequests".should_be                   0
-  "KeepAliveRequests".should_be                0
   "WriteErrors".should_be                      0
-  "HTMLTransferred".should_be                  600
-  "TargetDocumentLength".should_be             6
-  "TotalTransferred".should_be                 27500
   "CompleteRequests".should_be                 100
-  "TransferRate".should_be_over                460
-  "TimeTakenforTests".should_be_under          0.01
+  "TransferRate".should_be_over                500
   "RequestPerSecond".should_be_over            1000
-  "TimePerRequest".should_be_under             0.5
-  "TimePerConcurrentRequest".should_be_under   5
-  "TotalBodySent".should_be                    0
+  "TimePerRequest".should_be_under             100
+  "TimePerConcurrentRequest".should_be_under   3000
   "ConnetcErrors".should_be                    0
   "ReceiveErrors".should_be                    0
   "LengthErrors".should_be                     0
