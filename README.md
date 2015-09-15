@@ -9,8 +9,8 @@ You can test and configure ab command options dynamically by mruby script.
 ## How to build
 
 ```
-git submodule init
-git submodule update
+git clone --recursive https://github.com/matsumoto-r/ab-mruby.git
+cd ab-mruby
 make
 ```
 

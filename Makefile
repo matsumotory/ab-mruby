@@ -12,7 +12,7 @@ CFLAGS=-I/usr/include/apr-1.0 -I/usr/include/apr-1 -I./include -I$(MRUBY_ROOT)/i
 
 #   the default target
 all:
-		git submodule init && git submodule update && cd mruby && cp -p ../build_config.rb . && rake && cd ..
+		cd mruby && cp -p ../build_config.rb . && rake && cd ..
 		gcc ab-mruby.c -o ab-mruby $(CFLAGS) $(LIBS)
 
 #   cleanup
