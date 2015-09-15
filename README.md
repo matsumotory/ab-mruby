@@ -28,138 +28,43 @@ make
 #
 # Usage: ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb[http[s]://]hostname[:port]/path
 #
-# add_config(
-#     "TotalRequests"         => 100,                       # int
-#     "Concurrency"           => 10,                        # int max 20000
-#     "KeepAlive"             => true,                      # true or false or nil
-#     "VerboseLevel"          => 1,                         # int 1 ~ 5
-#     "ShowProgress"          => true,                      # true, false or nil
-#     "ShowPercentile"        => true,                      # true, false or nil
-#     "ShowConfidence"        => true,                      # true, false or nil
-#     "WaitSocketError"       => true,                      # true, false or nil
-#     "RequestTimeOut"        => 30000,                     # int msec
-#     "BechmarkTimelimit"     => 50000,                     # int sec
-#     "WindowSize"            => nil,                       # int byte
-#     "HeadMethodOnly"        => false,                     # true, false or nil
-#     "Postfile"              => nil,                       # './post.txt',
-#     "Putfile"               => nil,                       # './put.txt',
-#     "ContentType"           => nil,                       # 'application/x-www-form-urlencoded',
-#     "OutputGnuplotFile"     => nil,                       # './gnu.txt'
-#     "OutputCSVFile"         => nil,                       # './csv.txt'
-#     "AddCookie"             => nil,                       # 'Apache=1234'
-#     "AddHeader"             => 'User-Agent: ab-mruby',    # 'User-Agent: test'
-#     "BasicAuth"             => nil,                       # 'user:pass'
-#     "Proxy"                 => nil,                       # 'proxy[:port]'
-#     "ProxyAuth"             => nil,                       # 'user:pass'
-#     "OutputHtml"            => false,                     # true, false or nil
-#     "SilentMode"            => false,                     # true, false or nil
-#     "BindAddress"           => nil,                       # 'matsumoto-r.jp'
-#     "SSLCipher"             => 'DHE-RSA-AES128-SHA',      # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
-#     "SSLProtocol"           => 'SSL3',                    # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
-# )
-
-# print ab-mruby headers
-print <<EOS
-======================================================================
-This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
-Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
-
-                          CONFIG PHASE
-
-======================================================================
-EOS
 
 # get config value from C
-p get_config("TargetURL").to_s
-p get_config("TargetPort").to_s
-p get_config("TargetHost").to_s
-p get_config("TargetPath").to_s
-p get_config("TargetisSSL").to_s
+p get_config("TargetURL")
+p get_config("TargetPort")
+p get_config("TargetHost")
+p get_config("TargetPath")
+p get_config("TargetisSSL")     #=> true or false
 
 # defined config pattern
-if get_config("TargetHost").to_s == "blog.example.jp"
-
-  add_config(
-    "TotalRequests"         => 10,                        # int
-    "Concurrency"           => 1,                         # int max 20000
-    "KeepAlive"             => true,                      # true or false or nil
-    "VerboseLevel"          => 1,                         # int 1 ~ 5
-    "ShowProgress"          => true,                      # true, false or nil
-    "ShowPercentile"        => true,                      # true, false or nil
-    "ShowConfidence"        => true,                      # true, false or nil
-    "WaitSocketError"       => true,                      # true, false or nil
-    "RequestTimeOut"        => 30000,                     # int msec
-    "BechmarkTimelimit"     => 50000,                     # int sec
-    "WindowSize"            => nil,                       # int byte
-    "HeadMethodOnly"        => false,                     # true, false or nil
-    "Postfile"              => nil,                       # './post.txt',
-    "Putfile"               => nil,                       # './put.txt',
-    "ContentType"           => nil,                       # 'application/x-www-form-urlencoded',
-    "OutputGnuplotFile"     => nil,                       # './gnu.txt'
-    "OutputCSVFile"         => nil,                       # './csv.txt'
-    "AddCookie"             => nil,                       # 'Apache=1234'
-    "AddHeader"             => 'User-Agent: ab-blog',     # 'User-Agent: test'
-    "BasicAuth"             => nil,                       # 'user:pass'
-    "Proxy"                 => nil,                       # 'proxy[:port]'
-    "ProxyAuth"             => nil,                       # 'user:pass'
-    "OutputHtml"            => false,                     # true, false or nil
-    "BindAddress"           => nil,                       # 'matsumoto-r.jp'
-    "SSLCipher"             => nil,                       # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
-    "SSLProtocol"           => nil,                       # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
-  )
-
-
-elsif get_config("TargetHost").to_s == "moblog.example.jp"
-
-  add_config(
-    "TotalRequests"         => 20,                        # int
-    "Concurrency"           => 5,                         # int max 20000
-    "KeepAlive"             => false,                     # true or false or nil
-    "VerboseLevel"          => 5,                         # int 1 ~ 5
-    "ShowProgress"          => true,                      # true, false or nil
-    "ShowPercentile"        => true,                      # true, false or nil
-    "ShowConfidence"        => true,                      # true, false or nil
-    "WaitSocketError"       => true,                      # true, false or nil
-    "RequestTimeOut"        => 30000,                     # int msec
-    "BechmarkTimelimit"     => 50000,                     # int sec
-    "WindowSize"            => nil,                       # int byte
-    "HeadMethodOnly"        => false,                     # true, false or nil
-    "Postfile"              => nil,                       # './post.txt',
-    "Putfile"               => nil,                       # './put.txt',
-    "ContentType"           => nil,                       # 'application/x-www-form-urlencoded',
-    "OutputGnuplotFile"     => nil,                       # './gnu.txt'
-    "OutputCSVFile"         => nil,                       # './csv.txt'
-    "AddCookie"             => nil,                       # 'Apache=1234'
-    "AddHeader"             => 'User-Agent: ab-moblog',   # 'User-Agent: test'
-    "BasicAuth"             => nil,                       # 'user:pass'
-    "Proxy"                 => nil,                       # 'proxy[:port]'
-    "ProxyAuth"             => nil,                       # 'user:pass'
-    "OutputHtml"            => false,                     # true, false or nil
-    "BindAddress"           => nil,                       # 'matsumoto-r.jp'
-    "SSLCipher"             => nil,                       # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
-    "SSLProtocol"           => nil,                       # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
-  )
-
-else
-
-  add_config(
-    "TotalRequests"         => 100,                       # int
-    "Concurrency"           => 10,                        # int max 20000
-    "KeepAlive"             => false,                     # true or false or nil
-    "VerboseLevel"          => 1,                         # int 1 ~ 5
-    "SilentMode"            => true,
-  )
-
-end
-
-if get_config("TargetisSSL")
-
-  add_config(
-    "SSLCipher"             => 'DHE-RSA-AES128-SHA',      # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
-    "SSLProtocol"           => 'SSL3',                    # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
-  )
-
-end
+add_config(
+  "TotalRequests"         => 10,                        # int
+  "Concurrency"           => 1,                         # int max 20000
+  "KeepAlive"             => true,                      # true or false or nil
+  "VerboseLevel"          => 1,                         # int 1 ~ 5
+  "ShowProgress"          => true,                      # true, false or nil
+  "ShowPercentile"        => true,                      # true, false or nil
+  "ShowConfidence"        => true,                      # true, false or nil
+  "WaitSocketError"       => true,                      # true, false or nil
+  "RequestTimeOut"        => 30000,                     # int msec
+  "BechmarkTimelimit"     => 50000,                     # int sec
+  "WindowSize"            => nil,                       # int byte
+  "HeadMethodOnly"        => false,                     # true, false or nil
+  "Postfile"              => nil,                       # './post.txt',
+  "Putfile"               => nil,                       # './put.txt',
+  "ContentType"           => nil,                       # 'application/x-www-form-urlencoded',
+  "OutputGnuplotFile"     => nil,                       # './gnu.txt'
+  "OutputCSVFile"         => nil,                       # './csv.txt'
+  "AddCookie"             => nil,                       # 'Apache=1234'
+  "AddHeader"             => 'User-Agent: ab-blog',     # 'User-Agent: test'
+  "BasicAuth"             => nil,                       # 'user:pass'
+  "Proxy"                 => nil,                       # 'proxy[:port]'
+  "ProxyAuth"             => nil,                       # 'user:pass'
+  "OutputHtml"            => false,                     # true, false or nil
+  "BindAddress"           => nil,                       # 'matsumoto-r.jp'
+  "SSLCipher"             => nil,                       # 'DHE-RSA-AES256-SHA' or get from [openssl ciphers -v]
+  "SSLProtocol"           => nil,                       # 'SSL2', 'SSL3', 'TLS1', 'TLS1.1', 'TLS1.2' or 'ALL'
+)
 ```
 
 ### write test suite for HTTP benchmark into ab-mruby.test.rb
@@ -170,57 +75,35 @@ end
 #
 # BENCHMARK RESULT AND TEST PARAMETERS
 #
-# get_config "TargetURL"
-# get_config "TargetHost"
-# get_config "TargetPort"
-# get_config "TargetPath"
-# get_config "TargetisSSL"
-# get_config "TargetServerSoftware"
-# get_config "TargetServerHost"
-# get_config "TargetServerPort"
-# get_config "TargetServerSSLInfo"         # if use SSL
-# get_config "TargetDocumentPath"
-# get_config "TargetDocumentLength"
-# get_config "TimeTakenforTests"
-# get_config "CompleteRequests"
-# get_config "FailedRequests"
-# get_config "ConnetcErrors"               # if FailedRequests > 0
-# get_config "ReceiveErrors"               # if FailedRequests > 0
-# get_config "LengthErrors"                # if FailedRequests > 0
-# get_config "ExceptionsErrors"            # if FailedRequests > 0
-# get_config "WriteErrors"
-# get_config "Non2xxResponses"             # if Non2xxResponse > 0
-# get_config "KeepAliveRequests"
-# get_config "TotalTransferred"
-# get_config "TotalBodySent"               # if body send
-# get_config "HTMLTransferred"
-# get_config "RequestPerSecond"
-# get_config "TimePerConcurrentRequest"
-# get_config "TimePerRequest"
-# get_config "TransferRate"
+# "TargetURL"
+# "TargetHost"
+# "TargetPort"
+# "TargetPath"
+# "TargetisSSL"
+# "TargetServerSoftware"
+# "TargetServerHost"
+# "TargetServerPort"
+# "TargetServerSSLInfo"         # if use SSL
+# "TargetDocumentPath"
+# "TargetDocumentLength"
+# "TimeTakenforTests"
+# "CompleteRequests"
+# "FailedRequests"
+# "ConnetcErrors"               # if FailedRequests > 0
+# "ReceiveErrors"               # if FailedRequests > 0
+# "LengthErrors"                # if FailedRequests > 0
+# "ExceptionsErrors"            # if FailedRequests > 0
+# "WriteErrors"
+# "Non2xxResponses"             # if Non2xxResponse > 0
+# "KeepAliveRequests"
+# "TotalTransferred"
+# "TotalBodySent"               # if body send
+# "HTMLTransferred"
+# "RequestPerSecond"
+# "TimePerConcurrentRequest"
+# "TimePerRequest"
+# "TransferRate"
 #
-
-module Kernel
-  def test_suite &blk
-    @@r = get_config
-    @@t = blk
-  end
-  def bln_color val
-    (val) ? "[\e[33m#{val}\e[m]" : "[\e[36m#{val}\e[m]"
-  end
-  def should_be val
-    puts "[TEST CASE] #{bln_color @@r[self] == val} #{self} (#{@@r[self]}) should be #{val}"
-  end
-  def should_be_over val
-    puts "[TEST CASE] #{bln_color @@r[self] > val} #{self} (#{@@r[self]}) should be over #{val}"
-  end
-  def should_be_under val
-    puts "[TEST CASE] #{bln_color @@r[self] < val} #{self} (#{@@r[self]}) should be under #{val}"
-  end
-  def test_run
-    @@t.call
-  end
-end
 
 # print ab-mruby headers
 print <<EOS
@@ -265,18 +148,12 @@ test_run
 
 ```bash
 $ ./ab-mruby -m ab-mruby.conf.rb -M ab-mruby.test.rb http://192.168.12.251/
-======================================================================
-This is ab-mruby using ApacheBench Version 2.3 <$Revision: 1430300 $>
-Licensed to MATSUMOTO Ryosuke, https://github.com/matsumoto-r/ab-mruby
-
-                          CONFIG PHASE
-
-======================================================================
 "http://192.168.12.251/"
 "80"
 "192.168.12.251"
 "/"
 "false"
+
 This is ApacheBench, Version 2.3-mruby <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
