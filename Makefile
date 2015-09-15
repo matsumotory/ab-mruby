@@ -18,4 +18,8 @@ all:
 #   cleanup
 clean:
 	-rm -rf ab-mruby
+	cd mruby && rake clean
+
+clobber: clean
+	cd mruby && rake deep_clean
 
