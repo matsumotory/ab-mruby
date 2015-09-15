@@ -8,10 +8,24 @@ You can test and configure ab command options dynamically by mruby script.
 
 ## How to build
 
+- build
+
 ```
 git clone --recursive https://github.com/matsumoto-r/ab-mruby.git
 cd ab-mruby
 make
+```
+
+- clean
+
+```
+make clean
+```
+
+- clean all (included mrbgems)
+
+```
+make clobber
 ```
 
 ## How to use
