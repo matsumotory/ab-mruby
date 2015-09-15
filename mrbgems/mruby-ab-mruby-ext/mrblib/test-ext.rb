@@ -25,7 +25,7 @@ module Kernel
   def test_run
     @@t.call
     puts "\ntest suites: #{bln_color @@result}\n"
-    @@result
+    raise if @@result == false
   end
 end
 
