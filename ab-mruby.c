@@ -2531,13 +2531,19 @@ int main(int argc, const char * const argv[])
         char *addhdr = NULL;
         mrb_get_config_value(mrb, "AddHeader",  "z", &addhdr);
         if (addhdr != NULL) {
-            hdrs = apr_pstrcat(cntxt, hdrs, addhdr, "\r\n", NULL);
-            if (strncasecmp(addhdr, "Host:", 5) == 0) {
-                opt_host = 1;
-            } else if (strncasecmp(addhdr, "Accept:", 7) == 0) {
-                opt_accept = 1;
-            } else if (strncasecmp(addhdr, "User-Agent:", 11) == 0) {
-                opt_useragent = 1;
+            char *tok;
+            char separator_str[] = ",";
+            tok = strtok(addhdr,separator_str);
+            while (tok != NULL) {
+                hdrs = apr_pstrcat(cntxt, hdrs, tok, "\r\n", NULL);
+                if (strncasecmp(tok, "Host:", 5) == 0) {
+                    opt_host = 1;
+                } else if (strncasecmp(tok, "Accept:", 7) == 0) {
+                    opt_accept = 1;
+                } else if (strncasecmp(tok, "User-Agent:", 11) == 0) {
+                    opt_useragent = 1;
+                }
+                tok = strtok(NULL, separator_str);
             }
         }
 
